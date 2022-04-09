@@ -31,25 +31,23 @@ transform_train = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
+    transforms.repeat(1,3,1,1)
     transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
 ])
 
 transform_test = transforms.Compose([
     transforms.ToTensor(),
+    transforms.repeat(1,3,1,1)
     transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
 ])
 
 trainset = torchvision.datasets.MNIST(
     root='./data', train=True, download=True, transform=transform_train)
-for k, (image, label) in enumerate(trainset):
-      image = image.repeat(1,3,1,1)
 trainloader = torch.utils.data.DataLoader(
     trainset, batch_size=128, shuffle=True, num_workers=2)
 
 testset = torchvision.datasets.MNIST(
     root='./data', train=False, download=True, transform=transform_test)
-for k, (image, label) in enumerate(testset):
-      image = image.repeat(1,3,1,1)
 testloader = torch.utils.data.DataLoader(
     testset, batch_size=100, shuffle=False, num_workers=2)
 
