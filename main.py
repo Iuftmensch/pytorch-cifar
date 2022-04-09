@@ -31,12 +31,12 @@ transform_train = transforms.Compose([
     transforms.RandomCrop(32, padding=4),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    transforms.Normalize([0.5], [0.5]),
 ])
 
 transform_test = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    transforms.Normalize([0.5], [0.5]),
 ])
 
 trainset = torchvision.datasets.MNIST(
@@ -98,7 +98,7 @@ def train(epoch):
     total = 0
     for batch_idx, (a, b) in enumerate(trainloader):
         inputs = a.repeat(1,3,1,1)
-        targets = b.repeat(1,3,1,1)
+        targets = b
         inputs, targets = inputs.to(device), targets.to(device)
         optimizer.zero_grad()
         outputs = net(inputs)
@@ -124,7 +124,7 @@ def test(epoch):
     with torch.no_grad():
         for batch_idx, (a, b) in enumerate(testloader):
             inputs = a.repeat(1,3,1,1)
-            targets = b.repeat(1,3,1,1)
+            targets = b
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = net(inputs)
             loss = criterion(outputs, targets)
