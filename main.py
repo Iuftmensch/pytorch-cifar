@@ -41,11 +41,15 @@ transform_test = transforms.Compose([
 
 trainset = torchvision.datasets.MNIST(
     root='./data', train=True, download=True, transform=transform_train)
+for k, (image, label) in enumerate(trainset):
+      image = image.repeat(1,3,1,1)
 trainloader = torch.utils.data.DataLoader(
     trainset, batch_size=128, shuffle=True, num_workers=2)
 
 testset = torchvision.datasets.MNIST(
     root='./data', train=False, download=True, transform=transform_test)
+for k, (image, label) in enumerate(testset):
+      image = image.repeat(1,3,1,1)
 testloader = torch.utils.data.DataLoader(
     testset, batch_size=100, shuffle=False, num_workers=2)
 
@@ -97,8 +101,7 @@ def train(epoch):
     correct = 0
     total = 0
     for batch_idx, (inputs, targets) in enumerate(trainloader):
-        inputs = inputs.expand(3,28,28)
-        targets = targets.expand(3,28,28)
+        
         inputs, targets = inputs.to(device), targets.to(device)
         optimizer.zero_grad()
         outputs = net(inputs)
@@ -123,8 +126,7 @@ def test(epoch):
     total = 0
     with torch.no_grad():
         for batch_idx, (inputs, targets) in enumerate(testloader):
-            inputs = inputs.expand(3,28,28)
-            targets = targets.expand(3,28,28)
+        
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = net(inputs)
             loss = criterion(outputs, targets)
