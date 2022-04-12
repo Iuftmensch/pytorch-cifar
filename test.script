@@ -6,4 +6,4 @@
 #SBATCH--ntasks=1 
 #SBATCH--mem=4GB 
 #SBATCH --time=08:00:00
-$SRUN python ~/pytorch-cifar/test.py
+$SRUN python ~/pytorch-cifar/cifar10-googlenet-pytorch
