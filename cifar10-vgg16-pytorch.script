@@ -1,9 +1,8 @@
 #!/bin/bash
 #SBATCH --partition=gpu 
 #SBATCH --nodes=1 
-#SBATCH --pty 
-#SBATCH --gres=gpu:k80:1 
-#SBATCH--ntasks=1 
-#SBATCH--mem=4GB 
+#SBATCH --gres=gpu:p100:1 
+#SBATCH --ntasks=1 
+#SBATCH --mem=10GB 
 #SBATCH --time=08:00:00
-$SRUN python ~/pytorch-cifar/cifar10-googlenet-pytorch.py
+$SRUN python ~/pytorch-cifar/cifar10-vgg16-pytorch.py
