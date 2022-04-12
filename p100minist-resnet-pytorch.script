@@ -1,7 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=gpu 
 #SBATCH --nodes=1 
-#SBATCH --pty 
 #SBATCH --gres=gpu:p100:1 
 #SBATCH--ntasks=1 
 #SBATCH--mem=4GB 
