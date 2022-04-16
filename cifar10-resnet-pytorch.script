@@ -4,6 +4,6 @@
 #SBATCH --pty 
 #SBATCH --gres=gpu:k80:1 
 #SBATCH --ntasks=1 
-#SBATC H--mem=10GB 
+#SBATCH --mem=10GB 
 #SBATCH --time=08:00:00
 $SRUN python ~/pytorch-cifar/cifar10-resnet-pytorch.py
